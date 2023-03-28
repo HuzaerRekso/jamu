@@ -33,14 +33,16 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
+                        authorize.requestMatchers("/css/**", "/assets/**", "/js/**").permitAll()
                                 .requestMatchers("/index").permitAll()
-                                .requestMatchers("/users").hasRole(RoleConstant.ADMIN)
+                                .requestMatchers("/dashboard").authenticated()
+                                .requestMatchers("/register/**").hasAnyRole(RoleConstant.ADMIN)
+                                .requestMatchers("/users").hasAnyRole(RoleConstant.ADMIN)
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/users")
+                                .defaultSuccessUrl("/dashboard")
                                 .permitAll()
                 ).logout(
                         logout -> logout

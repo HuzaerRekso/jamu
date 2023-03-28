@@ -33,7 +33,7 @@ public class AuthController {
     public String showRegistrationForm(Model model){
         UserDTO user = new UserDTO();
         model.addAttribute("user", user);
-        return "register";
+        return "/register";
     }
 
     @PostMapping("/register/save")
@@ -54,6 +54,7 @@ public class AuthController {
 
         userService.saveUser(userDTO);
         return "redirect:/register?success";
+//        return "/dashboard";
     }
 
     @GetMapping("/users")

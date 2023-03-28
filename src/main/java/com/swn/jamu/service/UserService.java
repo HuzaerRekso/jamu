@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -48,7 +48,14 @@ public class UserService {
 
     public List<UserDTO> findAllUsers() {
         List<User> users = userRepository.findAll();
-        return users.stream().map(userMapper::toUserDTO)
-                .collect(Collectors.toList());
+        List<UserDTO> userDTOS = new ArrayList<>();
+        users.forEach(user -> {
+            UserDTO userDTO = userMapper.toUserDTO(user);
+            if (user.getRoles() != null && user.getRoles().size() > 0) {
+                userDTO.setRole(user.getRoles().get(0).getName());
+            }
+            userDTOS.add(userDTO);
+        });
+        return userDTOS;
     }
 }
