@@ -21,71 +21,11 @@
 </head>
 <body>
 
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Jamu SWN</a>
-    <button aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
-            class="navbar-toggler position-absolute d-md-none collapsed" data-bs-target="#sidebarMenu" data-bs-toggle="collapse"
-            type="button">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" th:href="@{/logout}">Log out</a>
-        </div>
-    </div>
-</header>
+<header th:insert="~{fragments/general.html :: header}"></header>
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" id="sidebarMenu">
-            <div class="position-sticky pt-3 sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="dashboard.html" th:href="@{/dashboard}">
-                            <span class="align-text-bottom" data-feather="home"></span>
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="align-text-bottom" data-feather="file"></span>
-                            Procurement Branch
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="align-text-bottom" data-feather="file"></span>
-                            Procurement Supplier
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="align-text-bottom" data-feather="file"></span>
-                            Branch
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="align-text-bottom" data-feather="file"></span>
-                            Jamu
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span class="align-text-bottom" data-feather="file"></span>
-                            Base Jamu
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="users.html" th:href="@{/users}">
-                            <span class="align-text-bottom" data-feather="file"></span>
-                            User
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
+        <nav th:insert="~{fragments/general.html :: navbar}"></nav>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>

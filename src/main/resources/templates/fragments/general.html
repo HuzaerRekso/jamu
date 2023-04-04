@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="" name="description">
+    <meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
+    <meta content="Hugo 0.108.0" name="generator">
+    <title>Dashboard</title>
+
+    <link href="https://getbootstrap.com/docs/5.3/examples/dashboard/" rel="canonical">
+
+    <link href="../../static/assets/dist/css/bootstrap.min.css" rel="stylesheet" th:href="@{/assets/dist/css/bootstrap.min.css}">
+
+    <style>
+        @media (min-width: 768px) {}
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="../../static/css/dashboard.css" rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" th:fragment="header">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Jamu SWN</a>
+    <button aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler position-absolute d-md-none collapsed" data-bs-target="#sidebarMenu" data-bs-toggle="collapse"
+            type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-nav">
+        <div class="nav-item text-nowrap">
+            <a class="nav-link px-3" th:href="@{/logout}">Log out</a>
+        </div>
+    </div>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" id="sidebarMenu" th:fragment="navbar">
+            <div class="position-sticky pt-3 sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html" th:href="@{/dashboard}">
+                            <span class="align-text-bottom" data-feather="home"></span>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <!-- ADMIN MENUS -->
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="#">
+                            <span class="align-text-bottom" data-feather="file"></span>
+                            Procurement Branch
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="#">
+                            <span class="align-text-bottom" data-feather="file"></span>
+                            Procurement Supplier
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="#">
+                            <span class="align-text-bottom" data-feather="file"></span>
+                            Branch
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="#">
+                            <span class="align-text-bottom" data-feather="file"></span>
+                            Jamu
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="#">
+                            <span class="align-text-bottom" data-feather="file"></span>
+                            Base Jamu
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="users.html" th:href="@{/users}">
+                            <span class="align-text-bottom" data-feather="file"></span>
+                            User
+                        </a>
+                    </li>
+
+                    <!-- BRANCH MENUS -->
+                    <li class="nav-item" sec:authorize="hasRole('STAFF')">
+                        <a class="nav-link" href="#">
+                            <span class="align-text-bottom" data-feather="file"></span>
+                            Store
+                        </a>
+                        <ul class="nav flex-column sub-list">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="align-text-bottom" data-feather="file"></span>
+                                    Procurement
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="align-text-bottom" data-feather="file"></span>
+                                    Stock
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="align-text-bottom" data-feather="file"></span>
+                                    Sale
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- SUPPLIER MENUS -->
+                    <li class="nav-item" sec:authorize="hasRole('SUPPLIER')">
+                        <a class="nav-link" href="#">
+                            <span class="align-text-bottom" data-feather="file"></span>
+                            Procurement Distributor
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+
+<script src="../../static/assets/dist/js/bootstrap.bundle.min.js" th:src="@{/assets/dist/js/bootstrap.bundle.min.js}"></script>
+
+<script crossorigin="anonymous"
+        integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+        src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+        src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+</body>
+</html>

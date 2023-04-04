@@ -1,11 +1,21 @@
 package com.swn.jamu.dto;
 
 public class UserDTO {
+
+    private Long id;
     private String fullname;
     private String username;
     private String password;
     private String branch;
     private String role;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFullname() {
         return fullname;
