@@ -33,20 +33,20 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/css/**", "/assets/**", "/js/**").permitAll()
+                        authorize.requestMatchers("/css/**", "/img/**", "/js/**", "/plugins/**").permitAll()
                                 .requestMatchers("/index").permitAll()
+                                .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/dashboard").authenticated()
-                                .requestMatchers("/register/**").hasAnyRole(RoleConstant.ADMIN)
-                                .requestMatchers("/users").hasAnyRole(RoleConstant.ADMIN)
+                                .requestMatchers("/user/**").hasAnyRole(RoleConstant.ADMIN)
                 ).formLogin(
                         form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
+                                .loginPage("/auth/login")
+                                .loginProcessingUrl("/auth/login")
                                 .defaultSuccessUrl("/dashboard")
                                 .permitAll()
                 ).logout(
                         logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
                                 .permitAll()
                 );
         return http.build();

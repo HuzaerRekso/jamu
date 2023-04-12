@@ -1,5 +1,7 @@
 package com.swn.jamu.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class UserDTO {
 
     private Long id;
@@ -7,6 +9,9 @@ public class UserDTO {
     private String username;
     private String password;
     private String branch;
+    private Long phoneNumber;
+    private String gender;
+    @NotBlank
     private String role;
 
     public Long getId() {
@@ -47,6 +52,22 @@ public class UserDTO {
 
     public void setBranch(String branch) {
         this.branch = branch;
+    }
+
+    public Long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getRole() {

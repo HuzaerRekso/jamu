@@ -15,7 +15,8 @@ public class User extends BaseEntity {
     private String username;
     private String password;
     private String fullname;
-    private Long telp;
+    private Long phoneNumber;
+    private String gender;
     private Boolean active;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
@@ -24,6 +25,9 @@ public class User extends BaseEntity {
             joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
             inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
     private List<Role> roles = new ArrayList<>();
+
+    /*@ManyToOne
+    private Branch branch;*/
 
     public long getId() {
         return id;
@@ -57,12 +61,20 @@ public class User extends BaseEntity {
         this.fullname = fullname;
     }
 
-    public Long getTelp() {
-        return telp;
+    public Long getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelp(Long telp) {
-        this.telp = telp;
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Boolean getActive() {
@@ -81,6 +93,21 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
+    /* CUSTOM GETTERS SETTER */
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+        role.getUsers().add(this);
+    }
+
+    public void removeRole(long roleId) {
+        Role role = this.roles.stream().filter(r -> r.getId() == roleId).findFirst().orElse(null);
+        if (role != null) {
+            this.roles.remove(role);
+            role.getUsers().remove(this);
+        }
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -88,7 +115,8 @@ public class User extends BaseEntity {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", fullname='" + fullname + '\'' +
-                ", telp=" + telp +
+                ", phoneNumber=" + phoneNumber +
+                ", gender='" + gender + '\'' +
                 ", active=" + active +
                 ", roles=" + roles +
                 '}';

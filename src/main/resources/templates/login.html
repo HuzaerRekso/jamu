@@ -1,50 +1,76 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <meta content="" name="description">
-    <meta content="Mark Otto, Jacob Thornton, and Bootstrap contributors" name="author">
-    <meta content="Hugo 0.108.0" name="generator">
-    <title>Login</title>
+    <title>Jamu SWN</title>
 
-    <link href="https://getbootstrap.com/docs/5.3/examples/sign-in/" rel="canonical">
-    <link href="../static/assets/dist/css/bootstrap.min.css" rel="stylesheet" th:href="@{/assets/dist/css/bootstrap.min.css}">
-
-    <style>
-      @media (min-width: 768px) {}
-    </style>
-
-    <!-- Custom styles for this template -->
-    <link href="../static/css/sign-in.css" rel="stylesheet" th:href="@{/css/sign-in.css}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../static/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+    <!-- icheck bootstrap -->
+    <link href="../static/plugins/icheck-bootstrap/icheck-bootstrap.min.css" rel="stylesheet" th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+    <!-- Theme style -->
+    <link href="../static/css/adminlte.min.css" rel="stylesheet" th:href="@{/css/adminlte.min.css}">
 </head>
-<body class="text-center">
-
-<main class="form-signin w-100 m-auto">
-    <div th:if="${param.error}">
-        <div class="alert alert-danger">Invalid Username or Password</div>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="alert alert-danger alert-dismissible" th:if="${param.error}">
+        <button aria-hidden="true" class="close" data-dismiss="alert" type="button">&times;</button>
+        <h5><i class="icon fas fa-ban"></i> Failed!</h5>
+        Invalid Username or Password
     </div>
-    <div th:if="${param.logout}">
-        <div class="alert alert-success"> You have been logged out.</div>
+    <div class="alert alert-info alert-dismissible" th:if="${param.logout}">
+        <button aria-hidden="true" class="close" data-dismiss="alert" type="button">&times;</button>
+        <h5><i class="icon fas fa-info"></i> Success!</h5>
+        You have been logged out
     </div>
-    <form method="post"
-          role="form"
-          th:action="@{/login}">
-        <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
-
-        <div class="form-floating">
-            <input class="form-control" id="username" name="username" placeholder="Username" type="text">
-            <label for="username">Username</label>
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <h1><b>Jamu</b>SWN</h1>
         </div>
-        <div class="form-floating">
-            <input class="form-control" id="password" name="password" placeholder="Password" type="password">
-            <label for="password">Password</label>
+        <div class="card-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+
+            <form method="post" role="form" th:action="@{/auth/login}">
+                <div class="input-group mb-3">
+                    <input class="form-control" id="username" name="username" placeholder="Username" type="text">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <input class="form-control" id="password" name="password" placeholder="Password" type="password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                </div>
+                <div class="social-auth-links text-center mt-2 mb-3">
+                    <button class="btn btn-block btn-primary" type="submit">Sign in</button>
+                </div>
+            </form>
+
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2022</p>
-    </form>
-</main>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->
 
-
+<!-- jQuery -->
+<script src="../static/plugins/jquery/jquery.min.js" th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script src="../static/js/adminlte.min.js" th:src="@{/js/adminlte.min.js}"></script>
 </body>
 </html>
