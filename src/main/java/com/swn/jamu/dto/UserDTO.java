@@ -8,7 +8,7 @@ public class UserDTO {
     private String fullname;
     private String username;
     private String password;
-    private String branch;
+    private Long branchId;
     private Long phoneNumber;
     private String gender;
     @NotBlank
@@ -46,12 +46,12 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getBranch() {
-        return branch;
+    public Long getBranchId() {
+        return branchId;
     }
 
-    public void setBranch(String branch) {
-        this.branch = branch;
+    public void setBranchId(Long branchId) {
+        this.branchId = branchId;
     }
 
     public Long getPhoneNumber() {

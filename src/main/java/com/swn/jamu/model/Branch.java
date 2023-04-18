@@ -14,6 +14,7 @@ public class Branch extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String code;
     private String name;
     private String address;
     private Long phoneNumber;
@@ -26,6 +27,14 @@ public class Branch extends BaseEntity {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

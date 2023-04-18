@@ -48,17 +48,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <h3 class="card-title">Users List</h3>
 
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input class="form-control float-right" name="table_search" placeholder="Search"
-                                               type="text">
-
+                                    <form class="input-group input-group-sm" method="get" style="width: 150px;" th:action="@{/user/users}">
+                                        <input class="form-control float-right" name="name" placeholder="Search by Name"
+                                               th:value="${name}" type="text">
                                         <div class="input-group-append">
                                             <button class="btn btn-default" type="submit">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
                                         <a class="btn btn-block btn-primary" href="user-register.html" th:href="@{/user/register}">Create User</a>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <!-- /.card-header -->
@@ -74,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="user : ${users}">
+                                    <tr th:each="user : ${users.content}">
                                         <td th:text="${user.id}"></td>
                                         <td th:text="${user.username}"></td>
                                         <td th:text="${user.fullname}"></td>
@@ -110,6 +109,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </table>
                             </div>
                             <!-- /.card-body -->
+                            <div class="card-footer clearfix" style="background-color:rgba(0,0,0,0)" th:if="${users.totalPages > 0}">
+                                <ul class="pagination pagination-sm m-0 float-right">
+                                    <li class="page-item"><a class="page-link" th:href="@{/user/users(size=${users.size}, page=${users.getPageable().getPageNumber()})}">&laquo;</a></li>
+                                    <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                                        <a class="page-link"
+                                           th:href="@{/user/users(size=${users.size}, page=${pageNumber})}"
+                                           th:text="${pageNumber}"></a>
+                                    </li>
+                                    <li class="page-item"><a class="page-link" th:href="@{/user/users(size=${users.size}, page=${users.getPageable().getPageNumber()+2})}">&raquo;</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <!-- /.card -->
                     </div>

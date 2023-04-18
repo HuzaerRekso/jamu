@@ -5,12 +5,16 @@ import com.swn.jamu.model.User;
 import com.swn.jamu.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/user")
@@ -27,6 +31,7 @@ public class UserController {
     public String showRegistrationForm(Model model){
         UserDTO user = new UserDTO();
         model.addAttribute("user", user);
+        model.addAttribute("branches", userService.findAllBranches());
         return "user-register";
     }
 
@@ -54,6 +59,7 @@ public class UserController {
     public String showEditForm(@PathVariable("id") Long id, Model model){
         UserDTO user = userService.findById(id);
         model.addAttribute("user", user);
+        model.addAttribute("branches", userService.findAllBranches());
         return "/user-edit";
     }
 
@@ -70,10 +76,26 @@ public class UserController {
         return "redirect:/user/users";
     }
 
+//    @GetMapping("/users")
+//    public String users(Model model){
+//        List<UserDTO> users = userService.findAllUsers();
+//        model.addAttribute("users", users);
+//        return "users";
+//    }
+
     @GetMapping("/users")
-    public String users(Model model){
-        List<UserDTO> users = userService.findAllUsers();
+    public String usersPage(Model model,
+                            @RequestParam("page") Optional<Integer> page,
+                            @RequestParam("size") Optional<Integer> size,
+                            String name) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+        Page<UserDTO> users = userService.findPaginated(PageRequest.of(currentPage-1, pageSize), name);
         model.addAttribute("users", users);
+        if (users.getTotalPages() > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, users.getTotalPages()).boxed().toList();
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         return "users";
     }
 

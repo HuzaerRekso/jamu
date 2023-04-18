@@ -75,10 +75,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </div>
                                     <div class="form-group">
                                         <label for="select-branch">Branch</label>
-                                        <select class="form-control" id="select-branch" th:field="*{branch}" th:placeholder="'Choose Branch'">
-                                            <option th:value="'Branch A'">Branch A</option>
-                                            <option th:value="'Branch B'">Branch B</option>
-                                            <option th:value="'Branch C'">Branch C</option>
+                                        <select class="form-control" id="select-branch" th:field="*{branchId}" th:placeholder="'Choose Branch'">
+                                            <option th:each="branch : ${branches}" th:text="${branch.name}" th:value="${branch.id}"></option>
                                         </select>
                                     </div>
                                     <div class="form-group">

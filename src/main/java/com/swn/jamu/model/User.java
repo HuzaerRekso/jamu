@@ -26,8 +26,8 @@ public class User extends BaseEntity {
             inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
     private List<Role> roles = new ArrayList<>();
 
-    /*@ManyToOne
-    private Branch branch;*/
+    @ManyToOne
+    private Branch branch;
 
     public long getId() {
         return id;
@@ -93,6 +93,14 @@ public class User extends BaseEntity {
         this.roles = roles;
     }
 
+    public Branch getBranch() {
+        return branch;
+    }
+
+    public void setBranch(Branch branch) {
+        this.branch = branch;
+    }
+
     /* CUSTOM GETTERS SETTER */
 
     public void addRole(Role role) {
@@ -119,6 +127,7 @@ public class User extends BaseEntity {
                 ", gender='" + gender + '\'' +
                 ", active=" + active +
                 ", roles=" + roles +
+                ", branch=" + branch +
                 '}';
     }
 }

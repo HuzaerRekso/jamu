@@ -106,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../branch.html" th:href="@{/branch/branches}">
                             <i class="nav-icon fas fa-store"></i>
                             <p>Branch</p>
                         </a>
@@ -124,7 +124,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="../users.html" th:href="@{/user/users}">
+                        <a class="nav-link" href="../users.html" th:href="@{/user/users(size=10, page=1)}">
                             <i class="nav-icon fas fa-user"></i>
                             <p>User</p>
                         </a>
