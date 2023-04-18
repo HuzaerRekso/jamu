@@ -39,6 +39,7 @@ public class SecurityConfig {
                                 .requestMatchers("/dashboard").authenticated()
                                 .requestMatchers("/user/**").hasAnyRole(RoleConstant.ADMIN)
                                 .requestMatchers("/branch/**").hasAnyRole(RoleConstant.ADMIN)
+                                .requestMatchers("/base-jamu/**").hasAnyRole(RoleConstant.ADMIN)
                 ).formLogin(
                         form -> form
                                 .loginPage("/auth/login")
