@@ -1,13 +1,22 @@
-package com.swn.jamu.dto;
+package com.swn.jamu.model;
 
-public class BaseJamuDTO {
+import com.swn.jamu.base.BaseEntity;
+import jakarta.persistence.*;
 
+import java.util.List;
+
+@Entity
+public class Jamu extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String code;
     private String name;
     private Long price;
     private Boolean active;
-    private Boolean selected;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jamu")
+    private List<Dose> dose;
 
     public Long getId() {
         return id;
@@ -49,23 +58,23 @@ public class BaseJamuDTO {
         this.active = active;
     }
 
-    public Boolean getSelected() {
-        return selected;
+    public List<Dose> getDose() {
+        return dose;
     }
 
-    public void setSelected(Boolean selected) {
-        this.selected = selected;
+    public void setDose(List<Dose> dose) {
+        this.dose = dose;
     }
 
     @Override
     public String toString() {
-        return "BaseJamuDTO{" +
+        return "Jamu{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", active=" + active +
-                ", selected=" + selected +
+                ", dose=" + dose +
                 '}';
     }
 }

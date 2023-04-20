@@ -66,4 +66,12 @@ public class BaseJamuService {
         baseJamu.setActive(false);
         baseJamuRepository.save(baseJamu);
     }
+
+    public List<BaseJamuDTO> findAllBaseJamu() {
+        return baseJamuRepository.findByActive(true).stream().map(baseJamuMapper::toBaseJamuDTO).toList();
+    }
+
+    public BaseJamu findBaseJamu(long id) {
+        return baseJamuRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Base Jamu not found"));
+    }
 }

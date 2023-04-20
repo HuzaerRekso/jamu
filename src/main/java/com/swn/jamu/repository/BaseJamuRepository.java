@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BaseJamuRepository extends JpaRepository<BaseJamu, Long> {
 
@@ -14,4 +16,6 @@ public interface BaseJamuRepository extends JpaRepository<BaseJamu, Long> {
     Page<BaseJamu> findByActiveAndNameContaining(Boolean active, String name, Pageable pageable);
 
     boolean existsByCodeAndActive(String code, Boolean active);
+
+    List<BaseJamu> findByActive(Boolean active);
 }

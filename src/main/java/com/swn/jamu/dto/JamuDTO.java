@@ -1,13 +1,15 @@
 package com.swn.jamu.dto;
 
-public class BaseJamuDTO {
+import java.util.List;
+
+public class JamuDTO {
 
     private Long id;
     private String code;
     private String name;
     private Long price;
     private Boolean active;
-    private Boolean selected;
+    private List<DoseDTO> dose;
 
     public Long getId() {
         return id;
@@ -49,23 +51,23 @@ public class BaseJamuDTO {
         this.active = active;
     }
 
-    public Boolean getSelected() {
-        return selected;
+    public List<DoseDTO> getDose() {
+        return dose;
     }
 
-    public void setSelected(Boolean selected) {
-        this.selected = selected;
+    public void setDose(List<DoseDTO> dose) {
+        this.dose = dose;
     }
 
     @Override
     public String toString() {
-        return "BaseJamuDTO{" +
+        return "JamuDTO{" +
                 "id=" + id +
                 ", code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", active=" + active +
-                ", selected=" + selected +
+                ", dose=" + dose +
                 '}';
     }
 }
