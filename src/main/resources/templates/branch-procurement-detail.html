@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Jamu SWN</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+          rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="../static/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+    <!-- Theme style -->
+    <link href="../static/css/adminlte.min.css" rel="stylesheet" th:href="@{/css/adminlte.min.css}">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+
+    <nav th:insert="~{fragments/template.html :: top-navbar}"></nav>
+    <aside th:insert="~{fragments/template.html :: side-navbar}"></aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0">Branch Procurement Page</h1>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Detail Branch Procurement</h3>
+                            </div>
+                            <form method="post" th:action="@{/branch-procurement/branch/accept/{id}(id=${procurement.id})}">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="branch-note">Branch's Note</label>
+                                        <input class="form-control" disabled id="branch-note" th:value="${procurement.branchNotes}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="distributor-note">Distributor's Note</label>
+                                        <input class="form-control" disabled id="distributor-note" th:value="${procurement.distributorNotes}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="status">Status</label>
+                                        <input class="form-control" disabled id="status" th:value="${procurement.status}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="request-date">Request Date</label>
+                                        <input class="form-control" disabled id="request-date" th:value="${procurement.requestDate}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="approved-date">Approved Date</label>
+                                        <input class="form-control" disabled id="approved-date" th:value="${procurement.approvedDate}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="reject-date">Reject Date</label>
+                                        <input class="form-control" disabled id="reject-date" th:value="${procurement.rejectDate}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="accept-date">Accept Date</label>
+                                        <input class="form-control" disabled id="accept-date" th:value="${procurement.acceptDate}" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cancel-date">Cancel Date</label>
+                                        <input class="form-control" disabled id="cancel-date" th:value="${procurement.cancelDate}" type="text">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+
+                                    <table class="table table-head-fixed text-nowrap" style="width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="detail, stat : ${procurement.details}">
+                                            <td th:text="${detail.baseJamuId}"></td>
+                                            <td th:text="${detail.baseJamuCode}"></td>
+                                            <td th:text="${detail.baseJamuName}"></td>
+                                            <td th:text="${detail.quantity}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button class="btn btn-primary" th:if="${procurement.status == 'APPROVED'}" type="submit">Accept</button>
+                                    <button class="btn btn-warning" th:formaction="@{/branch-procurement/branch/cancel/{id}(id=${procurement.id})}" th:if="${procurement.status == 'WAITING'}" type="submit">Cancel</button>
+                                    <a class="btn btn-secondary" href="branch-procurement.html" th:href="@{/branch-procurement/branch}">Back</a>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer th:insert="~{fragments/template.html :: footer}"></footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="../static/plugins/jquery/jquery.min.js" th:src="@{/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script src="../static/js/adminlte.min.js" th:src="@{/js/adminlte.min.js}"></script>
+</body>
+</html>

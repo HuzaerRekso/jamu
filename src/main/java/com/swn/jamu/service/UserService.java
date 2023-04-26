@@ -4,6 +4,7 @@ import com.swn.jamu.constant.RoleConstant;
 import com.swn.jamu.dto.BranchDTO;
 import com.swn.jamu.dto.UserDTO;
 import com.swn.jamu.mapper.UserMapper;
+import com.swn.jamu.model.Branch;
 import com.swn.jamu.model.Role;
 import com.swn.jamu.model.User;
 import com.swn.jamu.repository.RoleRepository;
@@ -146,5 +147,23 @@ public class UserService {
 
     public List<BranchDTO> findAllBranches() {
         return branchService.findAllBranch();
+    }
+
+    public long findUserBranchId(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user != null && user.getBranch() != null) {
+            return user.getBranch().getId();
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
+    }
+
+    public Branch findUserBranch(String username) {
+        User user = userRepository.findByUsername(username);
+        if (user != null && user.getBranch() != null) {
+            return user.getBranch();
+        } else {
+            throw new IllegalArgumentException("User not found");
+        }
     }
 }

@@ -41,6 +41,8 @@ public class SecurityConfig {
                                 .requestMatchers("/branch/**").hasAnyRole(RoleConstant.ADMIN)
                                 .requestMatchers("/base-jamu/**").hasAnyRole(RoleConstant.ADMIN)
                                 .requestMatchers("/jamu/**").hasAnyRole(RoleConstant.ADMIN)
+                                .requestMatchers("/branch-procurement/distributor/**").hasAnyRole(RoleConstant.ADMIN)
+                                .requestMatchers("/branch-procurement/branch/**").hasAnyRole(RoleConstant.STAFF)
                 ).formLogin(
                         form -> form
                                 .loginPage("/auth/login")
