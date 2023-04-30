@@ -5,6 +5,8 @@ public class BranchStockDTO {
     private Long id;
     private Long branchId;
     private Long baseJamuId;
+    private String baseJamuName;
+    private String baseJamuCode;
     private Long qty;
 
     public Long getId() {
@@ -29,6 +31,22 @@ public class BranchStockDTO {
 
     public void setBaseJamuId(Long baseJamuId) {
         this.baseJamuId = baseJamuId;
+    }
+
+    public String getBaseJamuName() {
+        return baseJamuName;
+    }
+
+    public void setBaseJamuName(String baseJamuName) {
+        this.baseJamuName = baseJamuName;
+    }
+
+    public String getBaseJamuCode() {
+        return baseJamuCode;
+    }
+
+    public void setBaseJamuCode(String baseJamuCode) {
+        this.baseJamuCode = baseJamuCode;
     }
 
     public Long getQty() {

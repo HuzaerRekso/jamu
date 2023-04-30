@@ -43,6 +43,7 @@ public class SecurityConfig {
                                 .requestMatchers("/jamu/**").hasAnyRole(RoleConstant.ADMIN)
                                 .requestMatchers("/branch-procurement/distributor/**").hasAnyRole(RoleConstant.ADMIN)
                                 .requestMatchers("/branch-procurement/branch/**").hasAnyRole(RoleConstant.STAFF)
+                                .requestMatchers("/branch-stock/branch/**").hasAnyRole(RoleConstant.STAFF)
                 ).formLogin(
                         form -> form
                                 .loginPage("/auth/login")
