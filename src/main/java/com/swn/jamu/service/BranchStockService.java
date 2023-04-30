@@ -4,10 +4,7 @@ import com.swn.jamu.dto.BranchStockDTO;
 import com.swn.jamu.dto.BranchStockHistoryDTO;
 import com.swn.jamu.mapper.BranchStockHistoryMapper;
 import com.swn.jamu.mapper.BranchStockMapper;
-import com.swn.jamu.model.Branch;
-import com.swn.jamu.model.BranchProcurementDetail;
-import com.swn.jamu.model.BranchStock;
-import com.swn.jamu.model.BranchStockHistory;
+import com.swn.jamu.model.*;
 import com.swn.jamu.repository.BranchStockHistoryRepository;
 import com.swn.jamu.repository.BranchStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,9 @@ import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BranchStockService {
@@ -94,5 +93,54 @@ public class BranchStockService {
 
         List<BranchStockHistoryDTO> dtoList = stock.getContent().stream().map(branchStockHistoryMapper::toBranchStockHistoryDTO).toList();
         return new PageImpl<>(dtoList, pageable, stock.getTotalElements());
+    }
+
+    public void decreaseStock(Branch branch, List<BranchSaleDetail> details) {
+        List<BranchStockHistory> branchStockHistoryList = new ArrayList<>();
+        List<BranchStock> branchStocks = new ArrayList<>();
+
+        Map<Long, BaseJamu> baseJamuMap = new HashMap<>();
+        Map<Long, Long> minusDoseMap = new HashMap<>();
+        details.forEach(detail -> {
+            if (detail.getJamu() != null && detail.getJamu().getDose() != null && detail.getJamu().getDose().size() > 0) {
+                detail.getJamu().getDose().forEach(dose -> {
+                    if (baseJamuMap.containsKey(dose.getBaseJamu().getId())) {
+                        long minusDose = minusDoseMap.get(dose.getBaseJamu().getId()) + dose.getDose();
+                        minusDoseMap.put(dose.getBaseJamu().getId(), minusDose);
+                    } else {
+                        baseJamuMap.put(dose.getBaseJamu().getId(), dose.getBaseJamu());
+                        minusDoseMap.put(dose.getBaseJamu().getId(), dose.getDose());
+                    }
+                });
+            }
+        });
+
+        for (Map.Entry<Long, BaseJamu> entry : baseJamuMap.entrySet()) {
+            long finalQuantity;
+            long previousQuantity;
+
+            BranchStock stock = branchStockRepository.findByBranchIdAndAndBaseJamuId(branch.getId(), entry.getKey());
+            if (stock == null) {
+                throw new IllegalArgumentException("Stock doesn't exist");
+            } else {
+                previousQuantity = stock.getQty();
+                finalQuantity = previousQuantity - minusDoseMap.get(entry.getKey());
+                if (finalQuantity < 0) {
+                    throw new IllegalArgumentException("Stock is not enough");
+                }
+                stock.setQty(finalQuantity);
+            }
+            branchStocks.add(stock);
+
+            BranchStockHistory branchStockHistory = new BranchStockHistory();
+            branchStockHistory.setBranchStock(stock);
+            branchStockHistory.setStockDate(LocalDate.now());
+            branchStockHistory.setPreviousQty(previousQuantity);
+            branchStockHistory.setQty(finalQuantity);
+            branchStockHistoryList.add(branchStockHistory);
+        }
+
+        branchStockRepository.saveAll(branchStocks);
+        branchStockHistoryRepository.saveAll(branchStockHistoryList);
     }
 }

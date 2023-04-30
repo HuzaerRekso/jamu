@@ -15,6 +15,7 @@ public class BranchSaleDetail extends BaseEntity {
     private Jamu jamu;
     private Long qty;
     private Long price;
+    private Long pricePerQty;
 
     public Long getId() {
         return id;
@@ -54,6 +55,14 @@ public class BranchSaleDetail extends BaseEntity {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Long getPricePerQty() {
+        return pricePerQty;
+    }
+
+    public void setPricePerQty(Long pricePerQty) {
+        this.pricePerQty = pricePerQty;
     }
 
     @Override

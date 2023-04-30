@@ -105,6 +105,10 @@ public class JamuService {
         return jamuMapper.toJamuDTO(jamuRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(" Jamu not found")));
     }
 
+    public Jamu findJamu(long id) {
+        return jamuRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(" Jamu not found"));
+    }
+
     public void deactivate(long id) {
         Jamu jamu = jamuRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Jamu not found"));
         if (!jamu.getActive()) {
@@ -123,5 +127,9 @@ public class JamuService {
         if (jamus != null && jamus.size() > 0) {
             doseRepository.deleteAll(jamus);
         }
+    }
+
+    public List<JamuDTO> getAllJamu() {
+        return jamuRepository.findByActive(true).stream().map(jamuMapper::toJamuDTO).toList();
     }
 }

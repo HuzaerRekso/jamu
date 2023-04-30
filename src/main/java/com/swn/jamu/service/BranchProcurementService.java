@@ -110,7 +110,6 @@ public class BranchProcurementService {
         procurement.setAcceptDate(LocalDate.now());
 
         branchStockService.addStock(procurement.getBranch(), procurement.getDetails());
-
         branchProcurementRepository.save(procurement);
     }
 
