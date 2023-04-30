@@ -77,4 +77,29 @@ public class BranchSaleController {
         model.addAttribute("sale", saleDTO);
         return "branch-sale-detail";
     }
+
+    /* CONTROLLER FOR DISTRIBUTOR/ADMIN */
+
+    @GetMapping("/distributor/sales/{branchId}")
+    public String findSalesAdmin(Model model,
+                            @RequestParam("page") Optional<Integer> page,
+                            @RequestParam("size") Optional<Integer> size,
+                            @PathVariable("branchId") Long branchId) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+        Page<BranchSaleDTO> sales = branchSaleService.findPaginated(PageRequest.of(currentPage-1, pageSize), branchId);
+        model.addAttribute("sales", sales);
+        if (sales.getTotalPages() > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, sales.getTotalPages()).boxed().toList();
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        return "branch-sale";
+    }
+
+    @GetMapping("/distributor/detail/{saleId}")
+    public String showDetailAdmin(@PathVariable("saleId") Long saleId, Model model){
+        BranchSaleDTO saleDTO = branchSaleService.findBranchSale(saleId);
+        model.addAttribute("sale", saleDTO);
+        return "branch-sale-detail";
+    }
 }

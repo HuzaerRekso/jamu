@@ -66,4 +66,24 @@ public class BranchStockController {
         }
         return "branch-stock-history";
     }
+
+    /* CONTROLLER FOR DISTRIBUTOR/ADMIN */
+
+    @GetMapping("/distributor/stocks/{branchId}")
+    public String findStockAdmin(Model model,
+                            @RequestParam("page") Optional<Integer> page,
+                            @RequestParam("size") Optional<Integer> size,
+                            String name,
+                            @PathVariable("branchId") Long branchId) {
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(10);
+        Page<BranchStockDTO> stocks = branchStockService.findPaginated(PageRequest.of(currentPage-1, pageSize),
+                name, branchId);
+        model.addAttribute("stocks", stocks);
+        if (stocks.getTotalPages() > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, stocks.getTotalPages()).boxed().toList();
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        return "branch-stock";
+    }
 }

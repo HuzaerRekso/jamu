@@ -48,8 +48,16 @@ public class BranchSaleService {
         this.branchSaleDetailMapper = branchSaleDetailMapper;
     }
 
+    public Page<BranchSaleDTO> findPaginated(Pageable pageable, long branchId) {
+        return findPaginatedCore(pageable, branchId);
+    }
+
     public Page<BranchSaleDTO> findPaginated(Pageable pageable, String userName) {
         long branchId = userService.findUserBranchId(userName);
+        return findPaginatedCore(pageable, branchId);
+    }
+
+    private Page<BranchSaleDTO> findPaginatedCore(Pageable pageable, long branchId) {
         Page<BranchSale> sales = branchSaleRepository.findByBranchId(branchId, pageable);
 
         List<BranchSaleDTO> dtoList = sales.getContent().stream().map(branchSaleMapper::toBranchSaleDTO).toList();

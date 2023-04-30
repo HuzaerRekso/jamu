@@ -3,7 +3,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -57,7 +57,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!--                                            </button>-->
 <!--                                        </div>-->
 <!--                                    </form>-->
-                                    <a class="btn btn-block btn-primary" href="branch-sale-create.html" th:href="@{/branch-sale/branch/add-daily-sale}">Add Daily Sale</a>
+                                    <a class="btn btn-block btn-primary"
+                                       href="branch-sale-create.html"
+                                       sec:authorize="hasRole('STAFF')"
+                                       th:href="@{/branch-sale/branch/add-daily-sale}">Add Daily Sale</a>
                                 </div>
                             </div>
                             <!-- /.card-header -->

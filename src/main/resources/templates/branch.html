@@ -81,6 +81,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <td th:text="${branch.phoneNumber}"></td>
                                         <td th:text="${branch.joinDate}"></td>
                                         <td>
+                                            <a class="fa fa-warehouse" th:href="@{/branch-stock/distributor/stocks/{branchId}(branchId=${branch.id})}"></a>
+                                            <a class="fa fa-dollar-sign" th:href="@{/branch-sale/distributor/sales/{branchId}(branchId=${branch.id})}"></a>
                                             <a class="fa fa-user-edit" th:href="@{/branch/edit/{id}(id=${branch.id})}"></a>
                                             <a class="fa fa-trash" data-toggle="modal" th:attr="data-target='#delete-modal'+${branch.id}" type="button"></a>
 

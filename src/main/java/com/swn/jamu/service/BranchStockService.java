@@ -75,8 +75,16 @@ public class BranchStockService {
         branchStockHistoryRepository.saveAll(branchStockHistoryList);
     }
 
+    public Page<BranchStockDTO> findPaginated(Pageable pageable, String name, long branchId) {
+        return findPaginatedCore(pageable, name, branchId);
+    }
+
     public Page<BranchStockDTO> findPaginated(Pageable pageable, String name, String userName) {
         long branchId = userService.findUserBranchId(userName);
+        return findPaginatedCore(pageable, name, branchId);
+    }
+
+    private Page<BranchStockDTO> findPaginatedCore(Pageable pageable, String name, long branchId) {
         Page<BranchStock> stock;
         if (StringUtils.hasLength(name)) {
             stock = branchStockRepository.findByBranchIdAndAndBaseJamuNameContaining(branchId, name, pageable);
