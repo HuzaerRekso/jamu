@@ -1,6 +1,9 @@
 package com.swn.jamu.service;
 
+import com.swn.jamu.constant.ColorsConstant;
 import com.swn.jamu.dto.BranchSaleDTO;
+import com.swn.jamu.dto.DashboardSaleDTO;
+import com.swn.jamu.dto.DatasetColorDTO;
 import com.swn.jamu.dto.JamuDTO;
 import com.swn.jamu.mapper.BranchSaleDetailMapper;
 import com.swn.jamu.mapper.BranchSaleMapper;
@@ -16,8 +19,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -101,5 +107,46 @@ public class BranchSaleService {
 
     public BranchSaleDTO findBranchSale(long id) {
         return branchSaleMapper.toBranchSaleDTO(branchSaleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Sale not found")));
+    }
+
+    public DashboardSaleDTO getDashboardData() {
+        LocalDate startOfMonth = LocalDate.now().withDayOfMonth(1);
+        LocalDate endOfMonth = LocalDate.now().plusMonths(1);
+        endOfMonth = endOfMonth.minusDays(1);
+        List<BranchSale> monthlySale = branchSaleRepository.findBySaleDateBetween(startOfMonth, endOfMonth);
+
+        Map<String, Long> map = new HashMap<>();
+        monthlySale.forEach(sale -> {
+            sale.getDetails().forEach(detail -> {
+                String name = detail.getJamu().getName();
+                if (map.containsKey(name)) {
+                    long totalJamuSold = map.get(name);
+                    totalJamuSold = totalJamuSold + detail.getQty();
+                    map.put(name, totalJamuSold);
+                } else {
+                    map.put(name, detail.getQty());
+                }
+            });
+        });
+
+        String[] jamuNames = new String[map.size()];
+        Long[] totalJamuSold = new Long[map.size()];
+        String[] colors = new String[map.size()];
+        int index = 0;
+        for (Map.Entry<String, Long> entry : map.entrySet()) {
+            jamuNames[index] = entry.getKey();
+            totalJamuSold[index] = entry.getValue();
+            colors[index] = ColorsConstant.COLORS[index];
+            index++;
+        }
+
+        DatasetColorDTO datasetColorDTO = new DatasetColorDTO();
+        datasetColorDTO.setData(totalJamuSold);
+        datasetColorDTO.setBackgroundColor(colors);
+
+        DashboardSaleDTO dto = new DashboardSaleDTO();
+        dto.setLabels(jamuNames);
+        dto.setDatasets(datasetColorDTO);
+        return dto;
     }
 }
