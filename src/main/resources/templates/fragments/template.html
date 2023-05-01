@@ -100,9 +100,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                     </li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../distributor-procurement.html" th:href="@{/distributor-procurement/distributor}">
                             <i class="nav-icon fas fa-truck-moving"></i>
                             <p>Procurement Supplier</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="../distributor-stock.html" th:href="@{/distributor-stock/distributor/stocks}">
+                            <i class="nav-icon fas fa-warehouse"></i>
+                            <p>Stock</p>
                         </a>
                     </li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
@@ -132,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <!-- SUPPLIER MENU -->
                     <li class="nav-item" sec:authorize="hasRole('SUPPLIER')">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../distributor-procurement.html" th:href="@{/distributor-procurement/distributor}">
                             <i class="nav-icon fas fa-truck"></i>
                             <p>Procurement Distributor</p>
                         </a>

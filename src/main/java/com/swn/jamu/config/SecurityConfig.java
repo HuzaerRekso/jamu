@@ -47,6 +47,9 @@ public class SecurityConfig {
                                 .requestMatchers("/branch-sale/branch/**").hasAnyRole(RoleConstant.STAFF, RoleConstant.ADMIN)
                                 .requestMatchers("/branch-stock/distributor/**").hasAnyRole(RoleConstant.ADMIN)
                                 .requestMatchers("/branch-sale/distributor/**").hasAnyRole(RoleConstant.ADMIN)
+                                .requestMatchers("/distributor-procurement/distributor/**").hasAnyRole(RoleConstant.ADMIN, RoleConstant.SUPPLIER)
+                                .requestMatchers("/distributor-procurement/supplier/**").hasAnyRole(RoleConstant.SUPPLIER)
+                                .requestMatchers("/distributor-stock/**").hasAnyRole(RoleConstant.ADMIN)
                 ).formLogin(
                         form -> form
                                 .loginPage("/auth/login")

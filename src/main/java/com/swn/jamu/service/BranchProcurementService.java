@@ -28,6 +28,7 @@ public class BranchProcurementService {
     private final UserService userService;
     private final BranchService branchService;
     private final BranchStockService branchStockService;
+    private final DistributorStockService distributorStockService;
     private final BranchProcurementMapper branchProcurementMapper;
     private final BranchProcurementDetailMapper branchProcurementDetailMapper;
 
@@ -38,6 +39,7 @@ public class BranchProcurementService {
                                     UserService userService,
                                     BranchService branchService,
                                     BranchStockService branchStockService,
+                                    DistributorStockService distributorStockService,
                                     BranchProcurementMapper branchProcurementMapper,
                                     BranchProcurementDetailMapper branchProcurementDetailMapper) {
         this.branchProcurementRepository = branchProcurementRepository;
@@ -46,6 +48,7 @@ public class BranchProcurementService {
         this.userService = userService;
         this.branchService = branchService;
         this.branchStockService = branchStockService;
+        this.distributorStockService = distributorStockService;
         this.branchProcurementMapper = branchProcurementMapper;
         this.branchProcurementDetailMapper = branchProcurementDetailMapper;
     }
@@ -110,6 +113,7 @@ public class BranchProcurementService {
         procurement.setAcceptDate(LocalDate.now());
 
         branchStockService.addStock(procurement.getBranch(), procurement.getDetails());
+        distributorStockService.decreaseStock(procurement.getDetails());
         branchProcurementRepository.save(procurement);
     }
 
