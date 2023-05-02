@@ -113,11 +113,13 @@ public class BranchStockService {
             if (detail.getJamu() != null && detail.getJamu().getDose() != null && detail.getJamu().getDose().size() > 0) {
                 detail.getJamu().getDose().forEach(dose -> {
                     if (baseJamuMap.containsKey(dose.getBaseJamu().getId())) {
-                        long minusDose = minusDoseMap.get(dose.getBaseJamu().getId()) + dose.getDose();
+                        long currentDose = dose.getDose() * detail.getQty();
+                        long minusDose = minusDoseMap.get(dose.getBaseJamu().getId()) + currentDose;
                         minusDoseMap.put(dose.getBaseJamu().getId(), minusDose);
                     } else {
+                        long currentDose = dose.getDose() * detail.getQty();
                         baseJamuMap.put(dose.getBaseJamu().getId(), dose.getBaseJamu());
-                        minusDoseMap.put(dose.getBaseJamu().getId(), dose.getDose());
+                        minusDoseMap.put(dose.getBaseJamu().getId(), currentDose);
                     }
                 });
             }

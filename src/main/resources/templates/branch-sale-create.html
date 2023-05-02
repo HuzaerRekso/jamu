@@ -131,11 +131,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../static/plugins/daterangepicker/daterangepicker.js" th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
 <script src="../static/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js" th:src="@{/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"></script>
 
-<script>
+<script th:inline="javascript">
     //Date picker
     $('#join-date').datetimepicker({
         format: 'yyyy-MM-DD'
     });
+
+    // Error logic
+    var error = /*[[${error}]]*/ "";
+    var errorFlag = error != null;
+    console.log(error);
+
+    if (errorFlag) {
+        $(document).Toasts('create', {
+            class: 'bg-danger',
+            title: 'Invalid',
+            body: error
+
+        })
+    }
 </script>
 </body>
 </html>

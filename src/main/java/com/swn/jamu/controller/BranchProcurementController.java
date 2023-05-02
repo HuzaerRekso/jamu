@@ -57,16 +57,28 @@ public class BranchProcurementController {
 
     @PostMapping("/distributor/approve/{id}")
     public String approveProcurement(@PathVariable("id") Long id,
-                                     @ModelAttribute("procurement") BranchProcurementDTO procurementDTO){
-        branchProcurementService.approveBranchProcurement(id, procurementDTO);
-        return "redirect:/branch-procurement/distributor";
+                                     @ModelAttribute("procurement") BranchProcurementDTO procurementDTO,
+                                     Model model){
+        try {
+            branchProcurementService.approveBranchProcurement(id, procurementDTO);
+            return "redirect:/branch-procurement/distributor";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "branch-procurement-distributor-detail";
+        }
     }
 
     @PostMapping("/distributor/reject/{id}")
     public String rejectProcurement(@PathVariable("id") Long id,
-                                    @ModelAttribute("procurement") BranchProcurementDTO procurementDTO){
-        branchProcurementService.rejectBranchProcurement(id, procurementDTO);
-        return "redirect:/branch-procurement/distributor";
+                                    @ModelAttribute("procurement") BranchProcurementDTO procurementDTO,
+                                    Model model){
+        try {
+            branchProcurementService.rejectBranchProcurement(id, procurementDTO);
+            return "redirect:/branch-procurement/distributor";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "branch-procurement-distributor-detail";
+        }
     }
 
     /* CONTROLLER FOR BRANCH */
@@ -108,9 +120,16 @@ public class BranchProcurementController {
 
     @PostMapping("/branch/register/save")
     public String registration(@Valid @ModelAttribute("procurement") BranchProcurementDTO procurementDTO,
-                               @AuthenticationPrincipal User userDetail){
-        branchProcurementService.requestBranchProcurement(procurementDTO, userDetail.getUsername());
-        return "redirect:/branch-procurement/branch";
+                               @AuthenticationPrincipal User userDetail,
+                               Model model){
+        try {
+            branchProcurementService.requestBranchProcurement(procurementDTO, userDetail.getUsername());
+            return "redirect:/branch-procurement/branch";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("baseJamus", branchProcurementService.getBaseJamuDTOS());
+            model.addAttribute("error", e.getMessage());
+            return "branch-procurement-register";
+        }
     }
 
     @GetMapping("/branch/{id}")
@@ -121,14 +140,26 @@ public class BranchProcurementController {
     }
 
     @PostMapping("/branch/accept/{id}")
-    public String acceptProcurement(@PathVariable("id") Long id){
-        branchProcurementService.acceptBranchProcurement(id);
-        return "redirect:/branch-procurement/branch";
+    public String acceptProcurement(@PathVariable("id") Long id,
+                                    Model model){
+        try {
+            branchProcurementService.acceptBranchProcurement(id);
+            return "redirect:/branch-procurement/branch";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "branch-procurement-detail";
+        }
     }
 
     @PostMapping("/branch/cancel/{id}")
-    public String cancelProcurement(@PathVariable("id") Long id){
-        branchProcurementService.cancelBranchProcurement(id);
-        return "redirect:/branch-procurement/branch";
+    public String cancelProcurement(@PathVariable("id") Long id,
+                                    Model model){
+        try {
+            branchProcurementService.cancelBranchProcurement(id);
+            return "redirect:/branch-procurement/branch";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "branch-procurement-detail";
+        }
     }
 }

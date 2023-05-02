@@ -50,9 +50,16 @@ public class BranchSaleController {
 
     @PostMapping("/branch/add-daily-sale/save")
     public String registration(@Valid @ModelAttribute("sale") BranchSaleDTO saleDTO,
-                               @AuthenticationPrincipal User userDetail){
-        branchSaleService.saveBranchSale(saleDTO, userDetail.getUsername());
-        return "redirect:/branch-sale/branch/sales";
+                               @AuthenticationPrincipal User userDetail,
+                               Model model){
+        try {
+            branchSaleService.saveBranchSale(saleDTO, userDetail.getUsername());
+            return "redirect:/branch-sale/branch/sales";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("jamus", branchSaleService.getAllJamu());
+            model.addAttribute("error", e.getMessage());
+            return "branch-sale-create";
+        }
     }
 
     @GetMapping("/branch/sales")
