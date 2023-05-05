@@ -72,19 +72,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="../branch-procurement.html" th:href="@{/branch-procurement/branch}">
                                     <i class="fas fa-truck nav-icon"></i>
                                     <p>Procurement</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="../branch-stock.html" th:href="@{/branch-stock/branch/stocks}">
                                     <i class="fas fa-warehouse nav-icon"></i>
                                     <p>Stock</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="../branch-sale.html" th:href="@{/branch-sale/branch/sales}">
                                     <i class="fas fa-dollar-sign nav-icon"></i>
                                     <p>Sale</p>
                                 </a>
@@ -94,15 +94,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <!-- ADMIN MENU -->
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../branch-procurement-distributor.html" th:href="@{/branch-procurement/distributor}">
                             <i class="nav-icon fas fa-truck-pickup"></i>
                             <p>Procurement Branch</p>
                         </a>
                     </li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../distributor-procurement.html" th:href="@{/distributor-procurement/distributor}">
                             <i class="nav-icon fas fa-truck-moving"></i>
                             <p>Procurement Supplier</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="../distributor-stock.html" th:href="@{/distributor-stock/distributor/stocks}">
+                            <i class="nav-icon fas fa-warehouse"></i>
+                            <p>Stock</p>
                         </a>
                     </li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
@@ -132,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                     <!-- SUPPLIER MENU -->
                     <li class="nav-item" sec:authorize="hasRole('SUPPLIER')">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="../distributor-procurement.html" th:href="@{/distributor-procurement/distributor}">
                             <i class="nav-icon fas fa-truck"></i>
                             <p>Procurement Distributor</p>
                         </a>

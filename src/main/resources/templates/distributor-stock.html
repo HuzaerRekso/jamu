@@ -13,10 +13,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
           rel="stylesheet">
     <!-- Font Awesome Icons -->
-    <link href="../../static/plugins/fontawesome-free/css/all.min.css" rel="stylesheet"
+    <link href="../static/plugins/fontawesome-free/css/all.min.css" rel="stylesheet"
           th:href="@{/plugins/fontawesome-free/css/all.min.css}">
     <!-- Theme style -->
-    <link href="../../static/css/adminlte.min.css" rel="stylesheet" th:href="@{/css/adminlte.min.css}">
+    <link href="../static/css/adminlte.min.css" rel="stylesheet" th:href="@{/css/adminlte.min.css}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard Page</h1>
+                        <h1 class="m-0">Distributor Stock Page</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -43,12 +43,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card card-danger">
+                        <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">This Month Sale</h3>
+                                <h3 class="card-title">Distributor Stock List</h3>
                             </div>
-                            <div class="card-body">
-                                <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-head-fixed text-nowrap" style="width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Code</th>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="stock : ${stocks}">
+                                        <td th:text="${stock.id}"></td>
+                                        <td th:text="${stock.baseJamuCode}"></td>
+                                        <td th:text="${stock.baseJamuName}"></td>
+                                        <td th:text="${stock.qty}"></td>
+                                        <td>
+                                            <a class="fa fa-history" th:href="@{/distributor-stock/distributor/stock-history/{distributorStockId}(distributorStockId=${stock.id})}"></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -75,58 +97,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE App -->
 <script src="../static/js/adminlte.min.js" th:src="@{/js/adminlte.min.js}"></script>
-<script src="../static/plugins/chart.js/Chart.min.js" th:src="@{/plugins/chart.js/Chart.min.js}"></script>
-<script th:inline="javascript">
-    var labelsDonut = /*[[${labels}]]*/ "";
-    var dataDonut = /*[[${data}]]*/ "";
-    var backgroundColorDonut = /*[[${backgroundColor}]]*/ "";
-    console.log(labelsDonut);
-    console.log(dataDonut);
-    console.log(backgroundColorDonut);
-
-    //-------------
-    //- DONUT CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d');
-    var donutData        = {
-        labels: labelsDonut,
-        datasets: [
-            {
-                data: dataDonut,
-                backgroundColor : backgroundColorDonut
-            }
-        ]
-    }
-    console.log(donutData);
-    /*var donutData        = {
-        labels: [
-            'Chrome',
-            'IE',
-            'FireFox',
-            'Safari',
-            'Opera',
-            'Navigator',
-        ],
-        datasets: [
-            {
-                data: [700,500,400,600,300,100],
-                backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-            }
-        ]
-    }*/
-
-    var donutOptions     = {
-        maintainAspectRatio : false,
-        responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(donutChartCanvas, {
-        type: 'doughnut',
-        data: donutData,
-        options: donutOptions
-    })
-</script>
 </body>
 </html>

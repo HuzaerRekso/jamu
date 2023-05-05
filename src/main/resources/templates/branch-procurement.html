@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Branch Page</h1>
+                        <h1 class="m-0">Branch Procurement Page</h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -45,10 +45,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Branch List</h3>
+                                <h3 class="card-title">Branch Procurement List</h3>
 
                                 <div class="card-tools">
-                                    <form class="input-group input-group-sm" method="get" style="width: 150px;" th:action="@{/branch/branches}">
+                                    <form class="input-group input-group-sm" method="get" style="width: 150px;" th:action="@{/branch-procurement/branch}">
                                         <input class="form-control float-right" name="name" placeholder="Search by Name"
                                                th:value="${name}" type="text">
                                         <div class="input-group-append">
@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
-                                        <a class="btn btn-block btn-primary" href="branch-register.html" th:href="@{/branch/register}">Create Branch</a>
+                                        <a class="btn btn-block btn-primary" href="base-jamu-register.html" th:href="@{/branch-procurement/branch/register}">Create Procurement</a>
                                     </form>
                                 </div>
                             </div>
@@ -66,47 +66,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Phone Number</th>
-                                        <th>Join Date</th>
+                                        <th>Branch</th>
+                                        <th>Request Date</th>
+                                        <th>Approved Date</th>
+                                        <th>Reject Date</th>
+                                        <th>Accept Date</th>
+                                        <th>Cancel Date</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="branch : ${branches}">
-                                        <td th:text="${branch.id}"></td>
-                                        <td th:text="${branch.name}"></td>
-                                        <td th:text="${branch.address}"></td>
-                                        <td th:text="${branch.phoneNumber}"></td>
-                                        <td th:text="${branch.joinDate}"></td>
+                                    <tr th:each="procurement : ${procurements}">
+                                        <td th:text="${procurement.id}"></td>
+                                        <td th:text="${procurement.branchName}"></td>
+                                        <td th:text="${procurement.requestDate}"></td>
+                                        <td th:text="${procurement.approvedDate}"></td>
+                                        <td th:text="${procurement.rejectDate}"></td>
+                                        <td th:text="${procurement.acceptDate}"></td>
+                                        <td th:text="${procurement.cancelDate}"></td>
+                                        <td class="text-bold" th:text="${procurement.status}"></td>
                                         <td>
-                                            <a class="fa fa-warehouse" th:href="@{/branch-stock/distributor/stocks/{branchId}(branchId=${branch.id})}"></a>
-                                            <a class="fa fa-dollar-sign" th:href="@{/branch-sale/distributor/sales/{branchId}(branchId=${branch.id})}"></a>
-                                            <a class="fa fa-user-edit" th:href="@{/branch/edit/{id}(id=${branch.id})}"></a>
-                                            <a class="fa fa-trash" data-toggle="modal" th:attr="data-target='#delete-modal'+${branch.id}" type="button"></a>
-
-                                            <!-- Modal -->
-                                            <div aria-hidden="true" aria-labelledby="delete-modal-label" class="modal fade" tabindex="-1" th:attr="id='delete-modal'+${branch.id}">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="delete-modal-label">Delete Branch</h5>
-                                                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Are you sure to delete this Branch?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-primary" data-dismiss="modal" type="button">Close</button>
-                                                            <a class="btn btn-danger" th:href="@{/branch/delete/{id}(id=${branch.id})}" type="submit">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                            <a class="fa fa-book-open" th:href="@{/branch-procurement/branch/{id}(id=${procurement.id})}"></a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -137,16 +118,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="../static/plugins/bootstrap/js/bootstrap.bundle.min.js" th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE App -->
 <script src="../static/js/adminlte.min.js" th:src="@{/js/adminlte.min.js}"></script>
-<script>
-    $('#delete-modal').click(function (){
-        var $modal = $('#delete-modal').clone().removeAttr('id');
-
-        var $a = $(this);
-        var rowId = $a.attr('row-id');
-
-        $modal.find('a[href]').attr('href', $modal.find('a[href]').attr('href').replace('_id_', rowId));
-        $modal.modal();
-    });
-</script>
 </body>
 </html>
