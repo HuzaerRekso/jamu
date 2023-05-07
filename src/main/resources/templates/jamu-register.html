@@ -59,7 +59,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <input class="form-control" id="name" placeholder="Type Jamu Name Here" required th:field="*{name}" type="text">
                                     </div>
                                     <div class="form-group">
-                                        <label for="price">Price</label>
+                                        <label for="price">Price(Rp)</label>
                                         <input class="form-control" id="price" placeholder="Type Jamu Price Here" required th:field="*{price}" type="number">
                                     </div>
 
@@ -69,16 +69,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <thead>
                                         <tr>
                                             <th>Select</th>
-                                            <th>ID</th>
+<!--                                            <th>ID</th>-->
                                             <th>Code</th>
                                             <th>Name</th>
-                                            <th>Dose</th>
+                                            <th>Dose(ml)</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="baseJamu, stat : ${baseJamus}">
                                             <td><input th:field="*{dose[__${stat.index}__].selected}" type="checkbox"></td>
-                                            <td th:text="${baseJamu.id}"></td>
+<!--                                            <td th:text="${baseJamu.id}"></td>-->
                                             <td hidden>
                                                 <input th:field="*{dose[__${stat.index}__].baseJamuId}" type="number">
                                             </td>

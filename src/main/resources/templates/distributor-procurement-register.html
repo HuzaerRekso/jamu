@@ -61,16 +61,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <thead>
                                         <tr>
                                             <th>Select</th>
-                                            <th>ID</th>
+<!--                                            <th>ID</th>-->
                                             <th>Code</th>
                                             <th>Name</th>
-                                            <th>Quantity</th>
+                                            <th>Quantity(bottle)</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="baseJamu, stat : ${baseJamus}">
                                             <td><input th:field="*{details[__${stat.index}__].selected}" type="checkbox"></td>
-                                            <td th:text="${baseJamu.id}"></td>
+<!--                                            <td th:text="${baseJamu.id}"></td>-->
                                             <td hidden>
                                                 <input th:field="*{details[__${stat.index}__].baseJamuId}" type="number">
                                             </td>

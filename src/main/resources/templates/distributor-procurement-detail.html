@@ -90,15 +90,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <table class="table table-head-fixed text-nowrap" style="width: 100%">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+<!--                                            <th>ID</th>-->
                                             <th>Code</th>
                                             <th>Name</th>
-                                            <th>Quantity</th>
+                                            <th>Quantity(bottle)</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="detail, stat : ${procurement.details}">
-                                            <td th:text="${detail.baseJamuId}"></td>
+<!--                                            <td th:text="${detail.baseJamuId}"></td>-->
                                             <td th:text="${detail.baseJamuCode}"></td>
                                             <td th:text="${detail.baseJamuName}"></td>
                                             <td th:text="${detail.quantity}"></td>
