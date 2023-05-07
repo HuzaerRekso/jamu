@@ -70,17 +70,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <table class="table table-head-fixed text-nowrap" style="width: 100%">
                                         <thead>
                                         <tr>
-                                            <th>ID</th>
+<!--                                            <th>ID</th>-->
                                             <th>Code</th>
                                             <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th>Sale</th>
-                                            <th>Price per Qty</th>
+                                            <th>Quantity(glass)</th>
+                                            <th>Sale(Rp)</th>
+                                            <th>Price per Qty(Rp)</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="detail, stat : ${sale.details}">
-                                            <td th:text="${detail.jamuId}"></td>
+<!--                                            <td th:text="${detail.jamuId}"></td>-->
                                             <td th:text="${detail.jamuCode}"></td>
                                             <td th:text="${detail.jamuName}"></td>
                                             <td th:text="${detail.qty}"></td>
