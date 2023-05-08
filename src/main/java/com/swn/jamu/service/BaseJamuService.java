@@ -43,6 +43,7 @@ public class BaseJamuService {
         }
 
         BaseJamu baseJamu = baseJamuMapper.toBaseJamu(baseJamuDTO);
+        baseJamu.setCode(generateBaseJamuCode());
         baseJamu.setActive(true);
         baseJamuRepository.save(baseJamu);
     }
@@ -73,5 +74,13 @@ public class BaseJamuService {
 
     public BaseJamu findBaseJamu(long id) {
         return baseJamuRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Base Jamu not found"));
+    }
+
+    private String generateBaseJamuCode() {
+        BaseJamu baseJamu = baseJamuRepository.findLatest();
+        long latestCodeSeq = Long.parseLong(baseJamu.getCode().substring(baseJamu.getCode().length()-3));
+        latestCodeSeq++;
+        String seq = ("000" + latestCodeSeq).substring(String.valueOf(latestCodeSeq).length());
+        return "BJ"+seq;
     }
 }

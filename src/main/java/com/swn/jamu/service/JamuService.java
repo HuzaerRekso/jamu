@@ -1,6 +1,7 @@
 package com.swn.jamu.service;
 
 import com.swn.jamu.dto.BaseJamuDTO;
+import com.swn.jamu.dto.DoseDTO;
 import com.swn.jamu.dto.JamuDTO;
 import com.swn.jamu.mapper.DoseMapper;
 import com.swn.jamu.mapper.JamuMapper;
@@ -17,6 +18,9 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class JamuService {
@@ -72,6 +76,7 @@ public class JamuService {
             }
         });
 
+        jamu.setCode(generateJamuCode());
         jamu.setDose(doses);
         jamu.setActive(true);
         jamuRepository.save(jamu);
@@ -131,5 +136,35 @@ public class JamuService {
 
     public List<JamuDTO> getAllJamu() {
         return jamuRepository.findByActive(true).stream().map(jamuMapper::toJamuDTO).toList();
+    }
+
+    public JamuDTO findEdit(long id) {
+        JamuDTO jamuDTO = jamuMapper.toJamuDTO(jamuRepository.findById(id).orElseThrow(() -> new IllegalArgumentException(" Jamu not found")));
+        List<BaseJamuDTO> baseJamuDTOS = getAllBaseJamu();
+        Map<Long, DoseDTO> map = jamuDTO.getDose().stream().collect(Collectors.toMap(DoseDTO::getBaseJamuId, Function.identity()));
+        List<DoseDTO> doseNewList = new ArrayList<>();
+        for (BaseJamuDTO baseJamuDTO : baseJamuDTOS) {
+            if (map.containsKey(baseJamuDTO.getId())) {
+                DoseDTO dto = map.get(baseJamuDTO.getId());
+                dto.setSelected(true);
+                doseNewList.add(dto);
+            } else {
+                DoseDTO dto = new DoseDTO();
+                dto.setBaseJamuId(baseJamuDTO.getId());
+                dto.setJamuId(jamuDTO.getId());
+                dto.setSelected(false);
+                doseNewList.add(dto);
+            }
+        }
+        jamuDTO.setDose(doseNewList);
+        return jamuDTO;
+    }
+
+    private String generateJamuCode() {
+        Jamu jamu = jamuRepository.findLatest();
+        long latestCodeSeq = Long.parseLong(jamu.getCode().substring(jamu.getCode().length()-3));
+        latestCodeSeq++;
+        String seq = ("000" + latestCodeSeq).substring(String.valueOf(latestCodeSeq).length());
+        return "J"+seq;
     }
 }

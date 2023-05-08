@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
@@ -57,13 +55,13 @@ public class JamuController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model){
-        JamuDTO jamu = jamuService.findById(id);
+        JamuDTO jamu = jamuService.findEdit(id);
 
         List<BaseJamuDTO> baseJamuDTOS = jamuService.getAllBaseJamu();
-        Map<Long, Long> map = jamu.getDose().stream().collect(Collectors.toMap(DoseDTO::getBaseJamuId,DoseDTO::getBaseJamuId));
-        baseJamuDTOS.forEach(baseJamu -> {
-            baseJamu.setSelected(map.containsKey(baseJamu.getId()));
-        });
+//        Map<Long, Long> map = jamu.getDose().stream().collect(Collectors.toMap(DoseDTO::getBaseJamuId,DoseDTO::getBaseJamuId));
+//        baseJamuDTOS.forEach(baseJamu -> {
+//            baseJamu.setSelected(map.containsKey(baseJamu.getId()));
+//        });
 
         model.addAttribute("jamu", jamu);
         model.addAttribute("baseJamus", baseJamuDTOS);

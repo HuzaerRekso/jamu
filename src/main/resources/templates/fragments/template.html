@@ -62,7 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
 
                     <!-- STAFF MENU -->
-                    <li class="nav-item menu-open" sec:authorize="hasRole('STAFF')">
+                    <li class="nav-item" sec:authorize="hasRole('STAFF')">
                         <a class="nav-link" href="#">
                             <i class="nav-icon fas fa-store"></i>
                             <p>
@@ -93,47 +93,68 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </li>
 
                     <!-- ADMIN MENU -->
-                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="../branch-procurement-distributor.html" th:href="@{/branch-procurement/distributor}">
-                            <i class="nav-icon fas fa-truck-pickup"></i>
-                            <p>Procurement Branch</p>
-                        </a>
-                    </li>
-                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="../distributor-procurement.html" th:href="@{/distributor-procurement/distributor}">
-                            <i class="nav-icon fas fa-truck-moving"></i>
-                            <p>Procurement Supplier</p>
-                        </a>
-                    </li>
+
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                         <a class="nav-link" href="../distributor-stock.html" th:href="@{/distributor-stock/distributor/stocks}">
                             <i class="nav-icon fas fa-warehouse"></i>
                             <p>Stock</p>
                         </a>
                     </li>
+
+                    <!-- PROCUREMENT MENU -->
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="../branch.html" th:href="@{/branch/branches}">
-                            <i class="nav-icon fas fa-store"></i>
-                            <p>Branch</p>
+                        <a class="nav-link" href="#">
+                            <i class="nav-icon fas fa-luggage-cart"></i>
+                            <p>Procurement<i class="right fas fa-angle-left"></i></p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" href="../branch-procurement-distributor.html" th:href="@{/branch-procurement/distributor}">
+                                    <i class="nav-icon fas fa-truck-pickup"></i>
+                                    <p>Procurement Branch</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" href="../distributor-procurement.html" th:href="@{/distributor-procurement/distributor}">
+                                    <i class="nav-icon fas fa-truck-moving"></i>
+                                    <p>Procurement Supplier</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
+
+                    <!-- MASTER MENU -->
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="../jamu.html" th:href="@{/jamu/jamus}">
-                            <i class="nav-icon fas fa-prescription-bottle-alt"></i>
-                            <p>Jamu</p>
+                        <a class="nav-link" href="#">
+                            <i class="nav-icon fas fa-cog"></i>
+                            <p>Master<i class="right fas fa-angle-left"></i></p>
                         </a>
-                    </li>
-                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="../base-jamu.html" th:href="@{/base-jamu/jamus}">
-                            <i class="nav-icon fas fa-prescription-bottle"></i>
-                            <p>Base Jamu</p>
-                        </a>
-                    </li>
-                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="../users.html" th:href="@{/user/users}">
-                            <i class="nav-icon fas fa-user"></i>
-                            <p>User</p>
-                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" href="../branch.html" th:href="@{/branch/branches}">
+                                    <i class="nav-icon fas fa-store"></i>
+                                    <p>Branch</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" href="../jamu.html" th:href="@{/jamu/jamus}">
+                                    <i class="nav-icon fas fa-prescription-bottle-alt"></i>
+                                    <p>Jamu</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" href="../base-jamu.html" th:href="@{/base-jamu/jamus}">
+                                    <i class="nav-icon fas fa-prescription-bottle"></i>
+                                    <p>Base Jamu</p>
+                                </a>
+                            </li>
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" href="../users.html" th:href="@{/user/users}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>User</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
                     <!-- SUPPLIER MENU -->
