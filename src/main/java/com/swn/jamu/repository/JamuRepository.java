@@ -4,6 +4,7 @@ import com.swn.jamu.model.Jamu;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface JamuRepository extends JpaRepository<Jamu, Long> {
     boolean existsByCodeAndActive(String code, Boolean active);
 
     List<Jamu> findByActive(boolean active);
+
+    @Query(value = "SELECT * FROM jamu j ORDER BY j.id DESC LIMIT 1", nativeQuery = true)
+    Jamu findLatest();
 }
