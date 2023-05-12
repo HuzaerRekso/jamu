@@ -31,6 +31,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                    <span class="text-bold">Hi, </span>
+                    <span class="text-bold" sec:authentication="name"></span>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning navbar-badge">2</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="max-width: min-content">
+                    <span class="dropdown-item dropdown-header">2 Notifications</span>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                        <div style="display: flex; align-items: center">
+                            <i class="fas fa-truck mr-2"></i>
+                            <div>Waiting Procurement Request for 5 Base Jamu</div>
+                            <span class="float-right text-muted text-sm" style="margin-left: 10px">2023-05-11</span>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                        <div style="display: flex; align-items: center">
+                            <i class="fas fa-truck mr-2"></i>
+                            <div>Waiting Procurement Request for 5 Base Jamu</div>
+                            <span class="float-right text-muted text-sm" style="margin-left: 10px">2023-05-11</span>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" data-widget="fullscreen" href="#" role="button" th:href="@{/auth/logout}">
                     <i class="fas fa-sign-out-alt"></i>
                 </a>
@@ -162,6 +193,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a class="nav-link" href="../distributor-procurement.html" th:href="@{/distributor-procurement/distributor}">
                             <i class="nav-icon fas fa-truck"></i>
                             <p>Procurement Distributor</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasRole('SUPPLIER')">
+                        <a class="nav-link" href="../supplier-stock.html" th:href="@{/supplier-stock/stocks}">
+                            <i class="nav-icon fas fa-warehouse"></i>
+                            <p>Stock</p>
                         </a>
                     </li>
                 </ul>

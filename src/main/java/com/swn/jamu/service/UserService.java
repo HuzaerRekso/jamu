@@ -166,4 +166,8 @@ public class UserService {
             throw new IllegalArgumentException("User not found");
         }
     }
+
+    public String getFullName(String username) {
+        return findUserByUsername(username).getFullname();
+    }
 }
