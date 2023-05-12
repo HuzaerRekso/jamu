@@ -50,6 +50,7 @@ public class SecurityConfig {
                                 .requestMatchers("/distributor-procurement/distributor/**").hasAnyRole(RoleConstant.ADMIN, RoleConstant.SUPPLIER)
                                 .requestMatchers("/distributor-procurement/supplier/**").hasAnyRole(RoleConstant.SUPPLIER)
                                 .requestMatchers("/distributor-stock/**").hasAnyRole(RoleConstant.ADMIN)
+                                .requestMatchers("/supplier-stock/**").hasAnyRole(RoleConstant.SUPPLIER)
                 ).formLogin(
                         form -> form
                                 .loginPage("/auth/login")
