@@ -98,6 +98,11 @@ public class SupplierStockService {
         }
     }
 
+    public void deleteStock(long id) {
+        SupplierStock supplierStock = supplierStockRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Id not found"));
+        supplierStockRepository.delete(supplierStock);
+    }
+
     public Page<SupplierStockDTO> findPaginated(Pageable pageable, String name) {
         Page<SupplierStock> stock;
         if (StringUtils.hasLength(name)) {

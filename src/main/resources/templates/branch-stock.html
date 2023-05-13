@@ -68,7 +68,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th>Code</th>
                                         <th>Name</th>
                                         <th>Quantity(ml)</th>
-                                        <th>Action</th>
+                                        <th style="text-align: center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <td th:text="${stock.baseJamuCode}"></td>
                                         <td th:text="${stock.baseJamuName}"></td>
                                         <td th:text="${stock.qty}"></td>
-                                        <td>
+                                        <td style="text-align: center">
                                             <a class="fa fa-history" th:href="@{/branch-stock/branch/stock-history/{branchStockId}(branchStockId=${stock.id})}"></a>
                                         </td>
                                     </tr>

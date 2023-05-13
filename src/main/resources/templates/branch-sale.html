@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th>Branch Name</th>
                                         <th>Date</th>
                                         <th>Total Sales(Rp)</th>
-                                        <th>Action</th>
+                                        <th style="text-align: center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -81,7 +81,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <td th:text="${sale.branchName}"></td>
                                         <td th:text="${sale.saleDate}"></td>
                                         <td th:text="${sale.totalSale}"></td>
-                                        <td>
+                                        <td style="text-align: center">
                                             <a class="fa fa-book-open" th:href="@{/branch-sale/branch/detail/{saleId}(saleId=${sale.id})}"></a>
                                         </td>
                                     </tr>

@@ -87,4 +87,11 @@ public class SupplierStockController {
         }
         return "supplier-stock-history";
     }
+
+    @GetMapping("/delete/{supplierStockId}")
+    public String deleteStock(@PathVariable("supplierStockId") Long supplierStockId,
+                             Model model) {
+        supplierStockService.deleteStock(supplierStockId);
+        return "redirect:/supplier-stock";
+    }
 }
