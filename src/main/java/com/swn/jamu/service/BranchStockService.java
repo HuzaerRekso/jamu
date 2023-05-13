@@ -153,4 +153,8 @@ public class BranchStockService {
         branchStockRepository.saveAll(branchStocks);
         branchStockHistoryRepository.saveAll(branchStockHistoryList);
     }
+
+    public List<BranchStockDTO> getAvailableStock(long branchId) {
+        return branchStockRepository.findByBranchIdAndAndQtyGreaterThan(branchId, 0).stream().map(branchStockMapper::toBranchStockDTO).toList();
+    }
 }

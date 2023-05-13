@@ -4,6 +4,8 @@ public class DoseDTO {
 
     private Long id;
     private Long baseJamuId;
+    private String baseJamuCode;
+    private String baseJamuName;
     private Long jamuId;
     private Long dose;
     private Boolean selected = false;
@@ -22,6 +24,22 @@ public class DoseDTO {
 
     public void setBaseJamuId(Long baseJamuId) {
         this.baseJamuId = baseJamuId;
+    }
+
+    public String getBaseJamuCode() {
+        return baseJamuCode;
+    }
+
+    public void setBaseJamuCode(String baseJamuCode) {
+        this.baseJamuCode = baseJamuCode;
+    }
+
+    public String getBaseJamuName() {
+        return baseJamuName;
+    }
+
+    public void setBaseJamuName(String baseJamuName) {
+        this.baseJamuName = baseJamuName;
     }
 
     public Long getJamuId() {
@@ -53,6 +71,8 @@ public class DoseDTO {
         return "DoseDTO{" +
                 "id=" + id +
                 ", baseJamuId=" + baseJamuId +
+                ", baseJamuCode=" + baseJamuCode +
+                ", baseJamuName='" + baseJamuName + '\'' +
                 ", jamuId=" + jamuId +
                 ", dose=" + dose +
                 ", selected=" + selected +

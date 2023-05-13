@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -136,6 +137,24 @@ public class JamuService {
 
     public List<JamuDTO> getAllJamu() {
         return jamuRepository.findByActive(true).stream().map(jamuMapper::toJamuDTO).toList();
+    }
+
+    public List<JamuDTO> findAvailableJamu(Map<Long, Long> baseJamuMap) {
+        List<Jamu> jamuDTOList  = jamuRepository.findByActive(true);
+        List<JamuDTO> finalJamuDTOList = new ArrayList<>();
+        jamuDTOList.forEach(jamu -> {
+            AtomicBoolean availableDose = new AtomicBoolean(true);
+            jamu.getDose().forEach(dose -> {
+                if (!baseJamuMap.containsKey(dose.getBaseJamu().getId())) {
+                    availableDose.set(false);
+                }
+            });
+            if (availableDose.get()) {
+                finalJamuDTOList.add(jamuMapper.toJamuDTO(jamu));
+            }
+        });
+        return finalJamuDTOList;
+//        return jamuRepository.findAvailableJamu(baseJamuIds).stream().map(jamuMapper::toJamuDTO).toList();
     }
 
     public JamuDTO findEdit(long id) {

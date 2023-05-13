@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BranchStockRepository extends JpaRepository<BranchStock, Long> {
 
@@ -14,4 +16,6 @@ public interface BranchStockRepository extends JpaRepository<BranchStock, Long> 
     Page<BranchStock> findByBranchIdAndAndBaseJamuNameContaining(long branchId, String baseJamuName, Pageable pageable);
 
     Page<BranchStock> findByBranchId(long branchId, Pageable pageable);
+
+    List<BranchStock> findByBranchIdAndAndQtyGreaterThan(long branchId, long minimalQty);
 }

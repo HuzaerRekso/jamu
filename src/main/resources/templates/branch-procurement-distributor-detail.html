@@ -66,19 +66,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <label for="request-date">Request Date</label>
                                         <input class="form-control" disabled id="request-date" th:value="${procurement.requestDate}" type="text">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" th:if="${procurement.status == 'APPROVED' || procurement.status == 'ACCEPTED'}">
                                         <label for="approved-date">Approved Date</label>
                                         <input class="form-control" disabled id="approved-date" th:value="${procurement.approvedDate}" type="text">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" th:if="${procurement.status == 'REJECTED'}">
                                         <label for="reject-date">Reject Date</label>
                                         <input class="form-control" disabled id="reject-date" th:value="${procurement.rejectDate}" type="text">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" th:if="${procurement.status == 'ACCEPTED'}">
                                         <label for="accept-date">Accept Date</label>
                                         <input class="form-control" disabled id="accept-date" th:value="${procurement.acceptDate}" type="text">
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" th:if="${procurement.status == 'CANCELED'}">
                                         <label for="cancel-date">Cancel Date</label>
                                         <input class="form-control" disabled id="cancel-date" th:value="${procurement.cancelDate}" type="text">
                                     </div>

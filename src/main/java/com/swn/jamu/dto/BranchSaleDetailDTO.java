@@ -1,5 +1,7 @@
 package com.swn.jamu.dto;
 
+import java.util.List;
+
 public class BranchSaleDetailDTO {
 
     private Long id;
@@ -12,6 +14,7 @@ public class BranchSaleDetailDTO {
     private Long price;
     private Long pricePerQty;
     private Boolean selected;
+    private List<DoseDTO> doses;
 
     public Long getId() {
         return id;
@@ -91,5 +94,13 @@ public class BranchSaleDetailDTO {
 
     public void setSelected(Boolean selected) {
         this.selected = selected;
+    }
+
+    public List<DoseDTO> getDoses() {
+        return doses;
+    }
+
+    public void setDoses(List<DoseDTO> doses) {
+        this.doses = doses;
     }
 }

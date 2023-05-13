@@ -31,8 +31,8 @@ public class BranchSaleController {
     }
 
     @GetMapping("/branch/add-daily-sale")
-    public String showRegistrationForm(Model model){
-        List<JamuDTO> jamus = branchSaleService.getAllJamu();
+    public String showRegistrationForm(Model model, @AuthenticationPrincipal User userDetail){
+        List<JamuDTO> jamus = branchSaleService.getAllJamu(userDetail.getUsername());
         List<BranchSaleDetailDTO> details = new ArrayList<>();
         jamus.forEach(jamu -> {
             BranchSaleDetailDTO detailDTO = new BranchSaleDetailDTO();
@@ -56,7 +56,7 @@ public class BranchSaleController {
             branchSaleService.saveBranchSale(saleDTO, userDetail.getUsername());
             return "redirect:/branch-sale/branch/sales";
         } catch (IllegalArgumentException e) {
-            model.addAttribute("jamus", branchSaleService.getAllJamu());
+            model.addAttribute("jamus", branchSaleService.getAllJamu(userDetail.getUsername()));
             model.addAttribute("error", e.getMessage());
             return "branch-sale-create";
         }

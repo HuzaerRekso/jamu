@@ -21,6 +21,8 @@ public interface JamuMapper {
     default void afterDoseToDoseDTO(@MappingTarget DoseDTO doseDTO, Dose dose) {
         if (doseDTO.getBaseJamuId() == null && dose.getBaseJamu() != null) {
             doseDTO.setBaseJamuId(dose.getBaseJamu().getId());
+            doseDTO.setBaseJamuCode(dose.getBaseJamu().getCode());
+            doseDTO.setBaseJamuName(dose.getBaseJamu().getName());
         }
         if (doseDTO.getJamuId() == null && dose.getJamu() != null) {
             doseDTO.setJamuId(dose.getJamu().getId());

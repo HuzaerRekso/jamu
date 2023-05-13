@@ -1,10 +1,7 @@
 package com.swn.jamu.service;
 
 import com.swn.jamu.constant.ColorsConstant;
-import com.swn.jamu.dto.BranchSaleDTO;
-import com.swn.jamu.dto.DashboardSaleDTO;
-import com.swn.jamu.dto.DatasetColorDTO;
-import com.swn.jamu.dto.JamuDTO;
+import com.swn.jamu.dto.*;
 import com.swn.jamu.mapper.BranchSaleDetailMapper;
 import com.swn.jamu.mapper.BranchSaleMapper;
 import com.swn.jamu.model.Branch;
@@ -70,8 +67,14 @@ public class BranchSaleService {
         return new PageImpl<>(dtoList, pageable, sales.getTotalElements());
     }
 
-    public List<JamuDTO> getAllJamu() {
-        return jamuService.getAllJamu();
+    public List<JamuDTO> getAllJamu(String userName) {
+        Branch branch = userService.findUserBranch(userName);
+        List<BranchStockDTO> availableStock = branchStockService.getAvailableStock(branch.getId());
+        Map<Long, Long> ids = new HashMap<>();
+        availableStock.forEach(stock -> {
+            ids.put(stock.getBaseJamuId(), stock.getBaseJamuId());
+        });
+        return jamuService.findAvailableJamu(ids);
     }
 
     public void saveBranchSale(BranchSaleDTO saleDTO, String userName) {
