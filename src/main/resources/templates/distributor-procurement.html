@@ -75,7 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <th>Accept Date</th>
                                         <th>Cancel Date</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th style="text-align: center">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -87,7 +87,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <td th:text="${procurement.acceptDate}"></td>
                                         <td th:text="${procurement.cancelDate}"></td>
                                         <td class="text-bold" th:text="${procurement.status}"></td>
-                                        <td>
+                                        <td style="text-align: center">
                                             <a class="fa fa-book-open" th:href="@{/distributor-procurement/distributor/{id}(id=${procurement.id})}"></a>
                                         </td>
                                     </tr>
