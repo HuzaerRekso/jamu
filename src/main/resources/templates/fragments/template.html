@@ -123,15 +123,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </ul>
                     </li>
 
-                    <!-- ADMIN MENU -->
-
-                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link" href="../distributor-stock.html" th:href="@{/distributor-stock/distributor/stocks}">
-                            <i class="nav-icon fas fa-warehouse"></i>
-                            <p>Stock</p>
-                        </a>
-                    </li>
-
                     <!-- PROCUREMENT MENU -->
                     <li class="nav-item menu-open" sec:authorize="hasRole('ADMIN')">
                         <a class="nav-link" href="#">
@@ -148,10 +139,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
                                 <a class="nav-link" href="../distributor-procurement.html" th:href="@{/distributor-procurement/distributor}">
                                     <i class="nav-icon fas fa-truck-moving"></i>
-                                    <p>Procurement Supplier</p>
+                                    <p>Procurement Distributor</p>
                                 </a>
                             </li>
                         </ul>
+                    </li>
+
+                    <!-- ADMIN MENU -->
+                    <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                        <a class="nav-link" href="../distributor-stock.html" th:href="@{/distributor-stock/distributor/stocks}">
+                            <i class="nav-icon fas fa-warehouse"></i>
+                            <p>Stock</p>
+                        </a>
                     </li>
 
                     <!-- MASTER MENU -->
@@ -162,15 +161,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                                <a class="nav-link" href="../branch.html" th:href="@{/branch/branches}">
-                                    <i class="nav-icon fas fa-store"></i>
-                                    <p>Branch</p>
+                                <a class="nav-link" href="../users.html" th:href="@{/user/users}">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>User</p>
                                 </a>
                             </li>
                             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                                <a class="nav-link" href="../jamu.html" th:href="@{/jamu/jamus}">
-                                    <i class="nav-icon fas fa-prescription-bottle-alt"></i>
-                                    <p>Jamu</p>
+                                <a class="nav-link" href="../branch.html" th:href="@{/branch/branches}">
+                                    <i class="nav-icon fas fa-store"></i>
+                                    <p>Branch</p>
                                 </a>
                             </li>
                             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
@@ -180,9 +179,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </a>
                             </li>
                             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                                <a class="nav-link" href="../users.html" th:href="@{/user/users}">
-                                    <i class="nav-icon fas fa-user"></i>
-                                    <p>User</p>
+                                <a class="nav-link" href="../jamu.html" th:href="@{/jamu/jamus}">
+                                    <i class="nav-icon fas fa-prescription-bottle-alt"></i>
+                                    <p>Jamu</p>
                                 </a>
                             </li>
                         </ul>
