@@ -33,6 +33,8 @@ public class BranchService {
 
         Branch branch = branchMapper.toBranch(branchDTO);
         branch.setActive(true);
+
+        branch.setCode(generateBranchCode());
         branchRepository.save(branch);
     }
 
@@ -74,5 +76,13 @@ public class BranchService {
 
     public List<BranchDTO> findAllBranch() {
         return branchRepository.findByActive(true).stream().map(branchMapper::toBranchDTO).toList();
+    }
+
+    private String generateBranchCode() {
+        Branch branch = branchRepository.findLatest();
+        long latestCodeSeq = Long.parseLong(branch.getCode().substring(branch.getCode().length()-3));
+        latestCodeSeq++;
+        String seq = ("000" + latestCodeSeq).substring(String.valueOf(latestCodeSeq).length());
+        return "BR"+seq;
     }
 }

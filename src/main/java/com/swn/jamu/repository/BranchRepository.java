@@ -4,6 +4,7 @@ import com.swn.jamu.model.Branch;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +19,7 @@ public interface BranchRepository extends JpaRepository<Branch, Long> {
     boolean existsByCodeAndActive(String code, Boolean active);
 
     List<Branch> findByActive(Boolean active);
+
+    @Query(value = "SELECT * FROM branch b ORDER BY b.id DESC LIMIT 1", nativeQuery = true)
+    Branch findLatest();
 }

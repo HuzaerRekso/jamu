@@ -30,7 +30,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Branch Procurement Page</h1>
+                        <h1 class="m-0">
+                            <a class="fa fa-arrow-left"
+                               style="margin-right: 10px"
+                               th:href="@{/branch-procurement/branch}"></a>
+                            Branch Procurement Page
+                        </h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -84,9 +89,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <!-- /.card-body -->
 
                                 <div class="card-footer">
-                                    <button class="btn btn-primary" th:href="@{/base-jamu/jamus}" type="submit">Submit</button>
+                                    <button class="btn btn-primary" type="submit">Submit</button>
                                     <button class="btn btn-info" type="reset">Reset</button>
-                                    <a class="btn btn-secondary" href="base-jamu.html" th:href="@{/base-jamu/jamus}">Cancel</a>
+                                    <a class="btn btn-secondary" href="base-jamu.html" th:href="@{/branch-procurement/branch}">Cancel</a>
                                 </div>
                             </form>
                         </div>
