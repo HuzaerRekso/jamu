@@ -27,5 +27,8 @@ public interface DistributorProcurementMapper {
             distributorProcurementDetailDTO.setBaseJamuName(jamu.getName());
             distributorProcurementDetailDTO.setBaseJamuCode(jamu.getCode());
         }
+        if (distributorProcurementDetail.getQuantity() != null) {
+            distributorProcurementDetailDTO.setQuantity(distributorProcurementDetail.getQuantity() / 1000);
+        }
     }
 }

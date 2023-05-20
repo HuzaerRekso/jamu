@@ -153,4 +153,10 @@ public class BranchProcurementService {
         return branchProcurementMapper.toBranchProcurementDTO(branchProcurementRepository.findById(id).orElseThrow(()
                 -> new IllegalArgumentException("Procurement not found")));
     }
+
+    public String countProcurementWaiting(String userName) {
+        long branchId = userService.findUserBranchId(userName);
+        List<BranchProcurement> procurements = branchProcurementRepository.findByStatusAndBranch(ProcurementStatusConstant.WAITING, branchId);
+        return String.valueOf(procurements.size());
+    }
 }

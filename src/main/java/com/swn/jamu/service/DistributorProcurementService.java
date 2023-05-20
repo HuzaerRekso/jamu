@@ -54,7 +54,7 @@ public class DistributorProcurementService {
             if (detailDTO.getSelected()) {
                 DistributorProcurementDetail detail = new DistributorProcurementDetail();
                 detail.setDistributorProcurement(procurement);
-                detail.setQuantity(detailDTO.getQuantity());
+                detail.setQuantity(detailDTO.getQuantity() * 1000);
                 detail.setBaseJamu(baseJamuService.findBaseJamu(detailDTO.getBaseJamuId()));
                 details.add(detail);
             }
