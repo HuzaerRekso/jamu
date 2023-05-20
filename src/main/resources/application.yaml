@@ -2,7 +2,7 @@ spring:
   datasource:
     username: root
     url: jdbc:mysql://localhost:3306/jamu
-    password: Asdfg123
+    password: Password1
   jpa:
     properties:
       hibernate:
